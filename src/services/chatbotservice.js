@@ -4,11 +4,11 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
-      response = {
+      let response = {
         text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
       };
       await callSendApi(sender_psid, response);
-      resolve("Successful");
+      resolve("Success");
     } catch (error) {
       reject(error);
     }
