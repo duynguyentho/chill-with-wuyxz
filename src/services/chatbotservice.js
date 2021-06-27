@@ -47,7 +47,7 @@ let getWeather = () => {
   return new Promise((resolve, reject) => {
     request(
       {
-        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi + "&appid=${WEATHER_KEY}`,
+        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92`,
         qs: { access_token: PAGE_ACCESS_TOKEN },
         method: "GET",
       },
