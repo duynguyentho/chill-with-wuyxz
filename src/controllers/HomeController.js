@@ -232,8 +232,8 @@ function removeAccents(str) {
   return str;
 }
 function help() {
-  return;
-  `---Hướng dẫn sử dụng---` +
+  return (
+    `---Hướng dẫn sử dụng---` +
     `\n` +
     `help            -- Xem hướng dẫn` +
     `\n` +
@@ -243,7 +243,8 @@ function help() {
     `\n` +
     `thời tiết       --Xem thời tiết` +
     `\n` +
-    `love            --Nhận một lời tỏ tình`;
+    `love            --Nhận một lời tỏ tình`
+  );
 }
 let setUpProfile = async (req, res) => {
   // Construct the message body
