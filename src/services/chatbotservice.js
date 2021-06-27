@@ -7,7 +7,7 @@ let handleGetStarted = () => {
       response = {
         text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
       };
-      await this.callSendApi(response);
+      await callSendApi(response);
       resolve("Successful");
     } catch (error) {
       reject(error);
