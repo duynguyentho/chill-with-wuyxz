@@ -37,8 +37,18 @@ function time() {
   }/${today.getUTCFullYear()} `;
 }
 function renderMessages(text) {
-  if (text.toLowerCase() === "hôm nay" || text.toLowerCase() === "hom nay") {
-    return time();
+  let str = removeAccents(text.toLowerCase());
+  switch (str) {
+    case "hom nay":
+      return time();
+      break;
+    case "today":
+      return time();
+      break;
+
+    default:
+      return `Có vẻ cậu đang tìm kiếm thứ gì đó...`;
+      break;
   }
 }
 let postWebhook = (req, res) => {
@@ -147,14 +157,23 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === "yes") {
-    response = { text: "Thanks!" };
-  } else if (payload === "no") {
-    response = { text: "Oops, try sending another image." };
-  } else if (payload === "GET_STARTED") {
-    response = {
-      text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
-    };
+  switch (payload) {
+    case "yes":
+      response = { text: "Thanks!" };
+      break;
+    case "no":
+      response = { text: "Oops, sorry !" };
+      break;
+    case "GET_STARTED":
+      response = {
+        text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
+      };
+      break;
+    default:
+      response = {
+        text: `Hôm nay trời thật đẹp phải không ?`,
+      };
+      break;
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -186,6 +205,32 @@ function callSendAPI(sender_psid, response) {
     }
   );
 }
+
+function removeAccents(str) {
+  var AccentsMap = [
+    "aàảãáạăằẳẵắặâầẩẫấậ",
+    "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+    "dđ",
+    "DĐ",
+    "eèẻẽéẹêềểễếệ",
+    "EÈẺẼÉẸÊỀỂỄẾỆ",
+    "iìỉĩíị",
+    "IÌỈĨÍỊ",
+    "oòỏõóọôồổỗốộơờởỡớợ",
+    "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+    "uùủũúụưừửữứự",
+    "UÙỦŨÚỤƯỪỬỮỨỰ",
+    "yỳỷỹýỵ",
+    "YỲỶỸÝỴ",
+  ];
+  for (var i = 0; i < AccentsMap.length; i++) {
+    var re = new RegExp("[" + AccentsMap[i].substr(1) + "]", "g");
+    var char = AccentsMap[i][0];
+    str = str.replace(re, char);
+  }
+  return str;
+}
+
 let setUpProfile = async (req, res) => {
   // Construct the message body
   let request_body = {
