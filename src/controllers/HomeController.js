@@ -150,7 +150,7 @@ function callSendAPI(sender_psid, response) {
     }
   );
 }
-let setUpProfile = (req, res) => {
+let setUpProfile = async (req, res) => {
   // Construct the message body
   let request_body = {
     get_started: { payload: "GET_STARTED" },
@@ -159,7 +159,7 @@ let setUpProfile = (req, res) => {
   //   Template String
 
   // Send the HTTP request to the Messenger Platform
-  request(
+  await request(
     {
       uri: `https://graph.facebook.com/v11.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
       qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -175,6 +175,7 @@ let setUpProfile = (req, res) => {
       }
     }
   );
+  return res.send("Set up user profile success!");
 };
 module.exports = {
   index: index,
