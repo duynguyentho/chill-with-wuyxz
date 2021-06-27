@@ -45,9 +45,11 @@ function renderMessages(text) {
     case "today":
       return time();
       break;
+    case "help":
+      return help();
 
     default:
-      return `Có vẻ cậu đang tìm kiếm thứ gì đó...`;
+      return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
       break;
   }
 }
@@ -230,7 +232,15 @@ function removeAccents(str) {
   }
   return str;
 }
-
+function help() {
+  return (
+    `---Hướng dẫn sử dụng---` +
+    `\n` +
+    `help     -- Xem hướng dẫn` +
+    `\n` +
+    `hôm nay / today --Xem ngày hôm nay`
+  );
+}
 let setUpProfile = async (req, res) => {
   // Construct the message body
   let request_body = {
