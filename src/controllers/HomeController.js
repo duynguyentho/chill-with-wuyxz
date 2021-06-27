@@ -6,9 +6,9 @@ let index = (req, res) => {
   return res.render("home.ejs");
 };
 function renderMessages(text) {
-    let date = "";
-    let day = parseInt(new Date().getDay());
-  if (text === "Ngày") {
+  let date = "";
+  let day = parseInt(new Date().getDay());
+  if (text === "Hôm nay") {
     switch (day) {
       case 0:
         date = "Chủ nhật";
@@ -33,7 +33,9 @@ function renderMessages(text) {
         break;
     }
   }
-  return `Hôm nay là ${date}. ${new Date().getUTCMinutes()}`;
+  return `Hôm nay là ${date}, ngày ${day.getDate()}/${
+    day.getUTCMonth() + 1
+  }/${day.getUTCFullYear()} `;
 }
 let postWebhook = (req, res) => {
   let body = req.body;
