@@ -77,7 +77,7 @@ function handleMessage(sender_psid, received_message) {
         break;
     }
     response = {
-      text: `Hôm nay là ${date}`,
+      text: `Hôm nay là ${date}. ${new Date()}`,
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
