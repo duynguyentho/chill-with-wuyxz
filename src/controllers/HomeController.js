@@ -5,38 +5,41 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let index = (req, res) => {
   return res.render("home.ejs");
 };
-function renderMessages(text) {
+function time() {
   let date = "";
   const today = new Date();
   let day = parseInt(new Date().getDay());
-  if (text === "Hôm nay") {
-    switch (day) {
-      case 0:
-        date = "Chủ nhật";
-        break;
-      case 1:
-        date = "Thứ hai";
-        break;
-      case 2:
-        date = "Thứ ba";
-        break;
-      case 3:
-        date = "Thứ tư";
-        break;
-      case 4:
-        date = "Thứ năm";
-        break;
-      case 5:
-        date = "Thứ sáu";
-        break;
-      case 6:
-        date = "Thứ bảy";
-        break;
-    }
+  switch (day) {
+    case 0:
+      date = "Chủ nhật";
+      break;
+    case 1:
+      date = "Thứ hai";
+      break;
+    case 2:
+      date = "Thứ ba";
+      break;
+    case 3:
+      date = "Thứ tư";
+      break;
+    case 4:
+      date = "Thứ năm";
+      break;
+    case 5:
+      date = "Thứ sáu";
+      break;
+    case 6:
+      date = "Thứ bảy";
+      break;
   }
   return `Hôm nay là ${date}, ngày ${today.getDate()}/${
     today.getUTCMonth() + 1
   }/${today.getUTCFullYear()} `;
+}
+function renderMessages(text) {
+  if (text.toLowerCase() === "hôm nay" || text.toLowerCase() === "hom nay") {
+    return time();
+  }
 }
 let postWebhook = (req, res) => {
   let body = req.body;
