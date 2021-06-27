@@ -92,7 +92,7 @@ function handleMessage(sender_psid, received_message) {
         break;
     }
     response = {
-      text: `Hôm nay là ${date}. ${new Date()}`,
+      text: `Hôm nay là ${date}. ${new Date().getUTCMinutes()}`,
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -203,9 +203,7 @@ let setUpProfile = async (req, res) => {
   );
   return res.send("Set up user profile success!");
 };
-let getWeather = (key) => {
-
-};
+let getWeather = (key) => {};
 module.exports = {
   index: index,
   postWebhook: postWebhook,
