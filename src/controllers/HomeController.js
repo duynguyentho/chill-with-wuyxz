@@ -66,18 +66,15 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
-    let input = received_message.text;
-    if (input === "lh") {
-      let date = "";
-      let day = new Date().getDay();
-      switch (day) {
-        case 0:
-          date = "Chủ nhật";
-          break;
-        case 1:
-          date = "Thứ hai";
-          break;
-      }
+    let date = "";
+    let day = new Date().getDay();
+    switch (day) {
+      case 0:
+        date = "Chủ nhật";
+        break;
+      case 1:
+        date = "Thứ hai";
+        break;
     }
     response = {
       text: `Hôm nay là ${date}`,
