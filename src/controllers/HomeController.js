@@ -5,6 +5,36 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let index = (req, res) => {
   return res.render("home.ejs");
 };
+function renderMessages(text) {
+  if (text === "Ngày") {
+    let date = "";
+    let day = parseInt(new Date().getDay());
+    switch (day) {
+      case 0:
+        date = "Chủ nhật";
+        break;
+      case 1:
+        date = "Thứ hai";
+        break;
+      case 2:
+        date = "Thứ ba";
+        break;
+      case 3:
+        date = "Thứ tư";
+        break;
+      case 4:
+        date = "Thứ năm";
+        break;
+      case 5:
+        date = "Thứ sáu";
+        break;
+      case 6:
+        date = "Thứ bảy";
+        break;
+    }
+  }
+  return `Hôm nay là ${date}. ${new Date().getUTCMinutes()}`;
+}
 let postWebhook = (req, res) => {
   let body = req.body;
 
@@ -61,38 +91,12 @@ let getWebhook = (req, res) => {
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
   let response;
-
   // Checks if the message contains text
   if (received_message.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
-    let date = "";
-    let day = parseInt(new Date().getDay());
-    switch (day) {
-      case 0:
-        date = "Chủ nhật";
-        break;
-      case 1:
-        date = "Thứ hai";
-        break;
-      case 2:
-        date = "Thứ ba";
-        break;
-      case 3:
-        date = "Thứ tư";
-        break;
-      case 4:
-        date = "Thứ năm";
-        break;
-      case 5:
-        date = "Thứ sáu";
-        break;
-      case 6:
-        date = "Thứ bảy";
-        break;
-    }
     response = {
-      text: `Hôm nay là ${date}. ${new Date().getUTCMinutes()}`,
+      text: renderMessages(received_message.text),
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
