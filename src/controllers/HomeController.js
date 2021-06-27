@@ -1,5 +1,6 @@
 require("dotenv").config();
 import request from "request";
+import chatbotService from "../services/chatbotservice";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 let index = (req, res) => {
@@ -152,7 +153,7 @@ function handleMessage(sender_psid, received_message) {
   callSendAPI(sender_psid, response);
 }
 // Handles messaging postbacks events
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
   let response;
 
   // Get the payload for the postback
@@ -167,9 +168,7 @@ function handlePostback(sender_psid, received_postback) {
       response = { text: "Oops, sorry !" };
       break;
     case "GET_STARTED":
-      response = {
-        text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
-      };
+      await chatbotService.handleGetStarted();
       break;
     default:
       response = {
@@ -233,13 +232,18 @@ function removeAccents(str) {
   return str;
 }
 function help() {
-  return (
-    `---Hướng dẫn sử dụng---` +
+  return;
+  `---Hướng dẫn sử dụng---` +
     `\n` +
-    `help     -- Xem hướng dẫn` +
+    `help            -- Xem hướng dẫn` +
     `\n` +
-    `hôm nay / today --Xem ngày hôm nay`
-  );
+    `hôm nay / today --Xem ngày hôm nay` +
+    `\n` +
+    `add             --Thêm lịch học` +
+    `\n` +
+    `thời tiết       --Xem thời tiết` +
+    `\n` +
+    `love            --Nhận một lời tỏ tình`;
 }
 let setUpProfile = async (req, res) => {
   // Construct the message body
