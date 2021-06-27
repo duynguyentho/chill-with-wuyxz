@@ -168,7 +168,7 @@ async function handlePostback(sender_psid, received_postback) {
       response = { text: "Oops, sorry !" };
       break;
     case "GET_STARTED":
-      await chatbotService.handleGetStarted();
+      await chatbotService.handleGetStarted(sender_psid);
       break;
     default:
       response = {
