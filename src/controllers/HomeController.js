@@ -67,13 +67,28 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     let date = "";
-    let day = parseInt(new Date().getDay()) + 1;
+    let day = parseInt(new Date().getDay());
     switch (day) {
       case 0:
         date = "Chủ nhật";
         break;
       case 1:
         date = "Thứ hai";
+        break;
+      case 2:
+        date = "Thứ ba";
+        break;
+      case 3:
+        date = "Thứ tư";
+        break;
+      case 4:
+        date = "Thứ năm";
+        break;
+      case 5:
+        date = "Thứ sáu";
+        break;
+      case 6:
+        date = "Thứ bảy";
         break;
     }
     response = {
@@ -187,6 +202,9 @@ let setUpProfile = async (req, res) => {
     }
   );
   return res.send("Set up user profile success!");
+};
+let getWeather = (key) => {
+
 };
 module.exports = {
   index: index,
