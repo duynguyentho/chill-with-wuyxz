@@ -2,7 +2,7 @@ require("dotenv").config();
 import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let handleGetStarted = (sender_psid) => {
-  return Promise(async (resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
       response = {
         text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
