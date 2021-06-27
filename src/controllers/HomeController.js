@@ -7,6 +7,7 @@ let index = (req, res) => {
 };
 function renderMessages(text) {
   let date = "";
+  const today = new Date();
   let day = parseInt(new Date().getDay());
   if (text === "Hôm nay") {
     switch (day) {
@@ -33,9 +34,9 @@ function renderMessages(text) {
         break;
     }
   }
-  return `Hôm nay là ${date}, ngày ${day.getDate()}/${
-    day.getUTCMonth() + 1
-  }/${day.getUTCFullYear()} `;
+  return `Hôm nay là ${date}, ngày ${today.getDate()}/${
+    today.getUTCMonth() + 1
+  }/${today.getUTCFullYear()} `;
 }
 let postWebhook = (req, res) => {
   let body = req.body;
