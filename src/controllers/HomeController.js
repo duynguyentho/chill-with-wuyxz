@@ -58,7 +58,6 @@ let getWebhook = (req, res) => {
     }
   }
 };
-
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
   let response;
@@ -67,8 +66,21 @@ function handleMessage(sender_psid, received_message) {
   if (received_message.text) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
+    let input = received_message.text;
+    if (input === "lh") {
+      let date = "";
+      let day = new Date().getDay();
+      switch (day) {
+        case 0:
+          date = "Chủ nhật";
+          break;
+        case 1:
+          date = "Thứ hai";
+          break;
+      }
+    }
     response = {
-      text: `Duy thật là đẹp trai đúng ko nào !`,
+      text: `Hôm nay là ${date}`,
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -105,7 +117,6 @@ function handleMessage(sender_psid, received_message) {
   // Send the response message
   callSendAPI(sender_psid, response);
 }
-
 // Handles messaging postbacks events
 function handlePostback(sender_psid, received_postback) {
   let response;
@@ -126,7 +137,6 @@ function handlePostback(sender_psid, received_postback) {
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
 }
-
 // Sends response messages via the Send API
 function callSendAPI(sender_psid, response) {
   // Construct the message body
