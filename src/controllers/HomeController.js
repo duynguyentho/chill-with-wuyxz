@@ -66,7 +66,6 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message
     response = {
       text: `You sent the message: "${received_message.text}". Now send me an image!`,
-      data: `Chào cậu, mình là Chill with wuyxz. Chúc cậu một ngày tốt lành !`,
     };
   }
 
