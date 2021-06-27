@@ -68,7 +68,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
+      text: `Duy thật là đẹp trai đúng ko nào !`,
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -119,7 +119,9 @@ function handlePostback(sender_psid, received_postback) {
   } else if (payload === "no") {
     response = { text: "Oops, try sending another image." };
   } else if (payload === "GET_STARTED") {
-    response = { text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3` };
+    response = {
+      text: `Chào cậu. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
+    };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
