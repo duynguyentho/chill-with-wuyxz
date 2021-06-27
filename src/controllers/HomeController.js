@@ -6,9 +6,9 @@ let index = (req, res) => {
   return res.render("home.ejs");
 };
 function renderMessages(text) {
-  if (text === "Ngày") {
     let date = "";
     let day = parseInt(new Date().getDay());
+  if (text === "Ngày") {
     switch (day) {
       case 0:
         date = "Chủ nhật";
