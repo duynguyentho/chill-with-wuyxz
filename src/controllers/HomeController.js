@@ -46,8 +46,6 @@ function renderMessages(sender_psid, text) {
       return time();
     case "help":
       return help();
-    case "thoi tiet":
-      break;
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
   }
