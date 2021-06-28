@@ -37,15 +37,15 @@ function time() {
     today.getUTCMonth() + 1
   }/${today.getUTCFullYear()} `;
 }
-async function renderMessages(sender_psid, text) {
+function renderMessages(sender_psid, text) {
   let str = removeAccents(text.toLowerCase());
   switch (str) {
     case "hom nay":
-      return await time();
+      return time();
     case "today":
-      return await time();
+      return time();
     case "help":
-      return await help();
+      return help();
     case "thoi tiet":
       break;
     default:
