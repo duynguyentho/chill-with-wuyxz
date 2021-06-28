@@ -1,5 +1,5 @@
 require("dotenv").config();
-import request from "request";
+import request, { get } from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
@@ -18,8 +18,9 @@ let handleGetStarted = (sender_psid) => {
 let sendWeather = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
+      let tinh = await getWeather();
       let response = {
-        text: `Chào Hà Nội`,
+        text: `Chào ${tinh}`,
       };
       await callSendApi(sender_psid, response);
       resolve("Success");
@@ -78,6 +79,28 @@ let callSendApi = (sender_psid, response) => {
       }
     }
   );
+};
+let getWeather = () => {
+  // Send the HTTP request to the Messenger Platform
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92`,
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: "GET",
+      },
+      (err, res, body) => {
+        if (!err) {
+          let weather = JSON.parse(body); // convert body to object
+          let result = `Hà nội`;
+          resolve(result);
+        } else {
+          console.error("Unable to send message:" + err);
+          reject(err);
+        }
+      }
+    );
+  });
 };
 
 module.exports = {

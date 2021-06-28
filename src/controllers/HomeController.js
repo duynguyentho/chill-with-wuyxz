@@ -115,6 +115,35 @@ function handleMessage(sender_psid, received_message) {
     response = {
       text: renderMessages(sender_psid, received_message.text),
     };
+    if (
+      received_message.text.toLowerCase() === "thoi tiet" ||
+      received_message.text.toLowerCase() === "thời tiết"
+    ) {
+      response = {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                buttons: [
+                  {
+                    type: "postback",
+                    title: "Yes!",
+                    payload: "thoi_tiet",
+                  },
+                  {
+                    type: "postback",
+                    title: "No!",
+                    payload: "no",
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      };
+    }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
@@ -167,6 +196,9 @@ async function handlePostback(sender_psid, received_postback) {
       break;
     case "GET_STARTED":
       await chatbotService.handleGetStarted(sender_psid);
+      break;
+    case "thoi_tiet":
+      await chatbotService.sendWeather(sender_psid);
       break;
     default:
       response = {
@@ -271,29 +303,6 @@ let setUpProfile = async (req, res) => {
   );
   return res.send("Set up user profile success!");
 };
-let getWeather = () => {
-  // Send the HTTP request to the Messenger Platform
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92`,
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: "GET",
-      },
-      (err, res, body) => {
-        if (!err) {
-          let weather = JSON.parse(body); // convert body to object
-          let result = `Hà nội`;
-          resolve(result);
-        } else {
-          console.error("Unable to send message:" + err);
-          reject(err);
-        }
-      }
-    );
-  });
-};
-
 module.exports = {
   index: index,
   postWebhook: postWebhook,
