@@ -48,9 +48,9 @@ async function renderMessages(sender_psid, text) {
       return help();
     case "thoi tiet":
       await chatbotService.sendWeather(sender_psid);
+      break;
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
-      break;
   }
 }
 let postWebhook = (req, res) => {
