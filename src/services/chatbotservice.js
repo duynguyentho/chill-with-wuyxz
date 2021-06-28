@@ -8,7 +8,7 @@ let handleGetStarted = (sender_psid) => {
       let username = await getUser(sender_psid);
       let weather = await getWeather();
       let response = {
-        text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3 \n ${weather}`,
+        text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3 \n ${weather.main}`,
       };
       await callSendApi(sender_psid, response);
       resolve("Success");
