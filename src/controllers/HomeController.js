@@ -284,7 +284,8 @@ let getWeather = () => {
       (err, res, body) => {
         console.log(typeof body);
         if (!err) {
-          let weather = `${body}`;
+          let weather = JSON.parse(body); // convert body to object
+          console.log(typeof weather);
           resolve(weather);
         } else {
           console.error("Unable to send message:" + err);
