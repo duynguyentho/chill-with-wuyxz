@@ -42,13 +42,12 @@ function renderMessages(text) {
   switch (str) {
     case "hom nay":
       return time();
-      break;
     case "today":
       return time();
-      break;
     case "help":
       return help();
-
+    case "thoi tiet":
+      return `${getWeather()}`;
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
       break;
@@ -273,7 +272,29 @@ let setUpProfile = async (req, res) => {
   );
   return res.send("Set up user profile success!");
 };
-let getWeather = (key) => {};
+let getWeather = () => {
+  // Send the HTTP request to the Messenger Platform
+  return new Promise((resolve, reject) => {
+    request(
+      {
+        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92`,
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: "GET",
+      },
+      (err, res, body) => {
+        console.log(typeof body);
+        if (!err) {
+          let weather = `${body}`;
+          resolve(weather);
+        } else {
+          console.error("Unable to send message:" + err);
+          reject(err);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   index: index,
   postWebhook: postWebhook,

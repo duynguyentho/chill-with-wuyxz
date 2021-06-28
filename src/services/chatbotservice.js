@@ -8,7 +8,7 @@ let handleGetStarted = (sender_psid) => {
       let username = await getUser(sender_psid);
       let weather = await getWeather();
       let response = {
-        text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3 \n ${typeof weather}`,
+        text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
       };
       await callSendApi(sender_psid, response);
       resolve("Success");
@@ -42,29 +42,7 @@ let getUser = (sender_psid) => {
   });
 };
 
-let getWeather = () => {
-  // Send the HTTP request to the Messenger Platform
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92`,
-        qs: { access_token: PAGE_ACCESS_TOKEN },
-        method: "GET",
-      },
-      (err, res, body) => {
-        console.log(body);
-        if (!err) {
-          console.log(typeof body);
-          let weather = `${body}`;
-          resolve(weather);
-        } else {
-          console.error("Unable to send message:" + err);
-          reject(err);
-        }
-      }
-    );
-  });
-};
+
 
 let callSendApi = (sender_psid, response) => {
   // Construct the message body
