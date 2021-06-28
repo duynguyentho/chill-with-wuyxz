@@ -37,7 +37,7 @@ function time() {
     today.getUTCMonth() + 1
   }/${today.getUTCFullYear()} `;
 }
-function renderMessages(text) {
+async function renderMessages(sender_psid, text) {
   let str = removeAccents(text.toLowerCase());
   switch (str) {
     case "hom nay":
@@ -47,7 +47,7 @@ function renderMessages(text) {
     case "help":
       return help();
     case "thoi tiet":
-      return `${getWeather()}`;
+      await chatbotService.sendWeather(sender_psid);
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
       break;
@@ -114,7 +114,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      text: renderMessages(received_message.text),
+      text: renderMessages(sender_psid, received_message.text),
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment

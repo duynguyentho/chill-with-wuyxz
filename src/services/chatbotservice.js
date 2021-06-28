@@ -15,6 +15,19 @@ let handleGetStarted = (sender_psid) => {
     }
   });
 };
+let sendWeather = (sender_psid) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let response = {
+        text: `Chào Hà Nội`,
+      };
+      await callSendApi(sender_psid, response);
+      resolve("Success");
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 
 let getUser = (sender_psid) => {
   // Send the HTTP request to the Messenger Platform
