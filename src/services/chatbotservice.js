@@ -54,7 +54,7 @@ let getWeather = () => {
       (err, res, body) => {
         console.log(body);
         if (!err) {
-          console.log(body);
+          console.log(typeof body);
           let weather = `${body}`;
           resolve(weather);
         } else {
