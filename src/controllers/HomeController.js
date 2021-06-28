@@ -117,6 +117,11 @@ function handleMessage(sender_psid, received_message) {
     response = {
       text: renderMessages(sender_psid, received_message.text),
     };
+    let str = removeAccents(received_message.text.toLowerCase());
+    if (str === "thoi tiet") {
+      callSendAPI(sender_psid, "duy đẹp trai");
+      return;
+    }
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
@@ -283,11 +288,9 @@ let getWeather = (sender_psid) => {
         method: "GET",
       },
       (err, res, body) => {
-        console.log(typeof body);
         if (!err) {
           let weather = JSON.parse(body); // convert body to object
           console.log(typeof weather);
-          callSendAPI(sender_psid, "Duy đẹp trai");
           resolve(weather);
         } else {
           console.error("Unable to send message:" + err);
