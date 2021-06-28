@@ -1,12 +1,10 @@
 require("dotenv").config();
 import request from "request";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const WEATHER_KEY = process.env.WEATHER_KEY;
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
     try {
       let username = await getUser(sender_psid);
-      let weather = await getWeather();
       let response = {
         text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
       };
@@ -41,8 +39,6 @@ let getUser = (sender_psid) => {
     );
   });
 };
-
-
 
 let callSendApi = (sender_psid, response) => {
   // Construct the message body
