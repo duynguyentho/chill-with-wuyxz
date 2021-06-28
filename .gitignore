@@ -2,6 +2,4 @@
 /vendor
 /.idea
 .idea/
-/.env
 .env
-.env/
