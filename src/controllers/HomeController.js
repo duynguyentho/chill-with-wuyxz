@@ -37,7 +37,7 @@ function time() {
     today.getUTCMonth() + 1
   }/${today.getUTCFullYear()} `;
 }
-function renderMessages(text) {
+function renderMessages(sender_psid, text) {
   let str = removeAccents(text.toLowerCase());
   switch (str) {
     case "hom nay":
@@ -47,7 +47,8 @@ function renderMessages(text) {
     case "help":
       return help();
     case "thoi tiet":
-      return `${getWeather()}`;
+      getWeather(sender_psid);
+      break;
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
       break;
@@ -114,7 +115,7 @@ function handleMessage(sender_psid, received_message) {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      text: renderMessages(received_message.text),
+      text: renderMessages(sender_psid, received_message.text),
     };
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
@@ -272,7 +273,7 @@ let setUpProfile = async (req, res) => {
   );
   return res.send("Set up user profile success!");
 };
-let getWeather = () => {
+let getWeather = (sender_psid) => {
   // Send the HTTP request to the Messenger Platform
   return new Promise((resolve, reject) => {
     request(
@@ -286,6 +287,7 @@ let getWeather = () => {
         if (!err) {
           let weather = JSON.parse(body); // convert body to object
           console.log(typeof weather);
+          callSendAPI(sender_psid, "Duy đẹp trai");
           resolve(weather);
         } else {
           console.error("Unable to send message:" + err);
