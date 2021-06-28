@@ -83,4 +83,5 @@ let callSendApi = (sender_psid, response) => {
 module.exports = {
   handleGetStarted: handleGetStarted,
   callSendApi: callSendApi,
+  sendWeather: sendWeather,
 };
