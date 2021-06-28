@@ -20,7 +20,7 @@ let sendWeather = (sender_psid) => {
     try {
       let tinh = await getWeather();
       let response = {
-        text: `Chào ${tinh}`,
+        text: `${tinh}`,
       };
       await callSendApi(sender_psid, response);
       resolve("Success");
@@ -85,14 +85,17 @@ let getWeather = () => {
   return new Promise((resolve, reject) => {
     request(
       {
-        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92`,
+        uri: `https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=47607a1ac412548239483f4e09f3cc92&units=metric&lang=vi`,
         qs: { access_token: PAGE_ACCESS_TOKEN },
         method: "GET",
       },
       (err, res, body) => {
         if (!err) {
           let weather = JSON.parse(body); // convert body to object
-          let result = `Hà nội`;
+          let result =
+            `${weather.name}, ${weather.weather[0].description}, Nhiệt độ: ${weather.main.temp}, Nhiệt độ cảm nhận: ${weather.main.feels_like}, Độ ẩm: ${weather.main.humidity}%` +
+            `\n` +
+            `Tốc độ gió: ${weather.wind.speed} m/s`;
           resolve(result);
         } else {
           console.error("Unable to send message:" + err);
