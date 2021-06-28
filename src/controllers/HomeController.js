@@ -41,11 +41,11 @@ async function renderMessages(sender_psid, text) {
   let str = removeAccents(text.toLowerCase());
   switch (str) {
     case "hom nay":
-      return time();
+      return await time();
     case "today":
-      return time();
+      return await time();
     case "help":
-      return help();
+      return await help();
     case "thoi tiet":
       break;
     default:
