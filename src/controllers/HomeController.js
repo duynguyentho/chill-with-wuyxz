@@ -124,6 +124,8 @@ function handleMessage(sender_psid, received_message) {
             template_type: "generic",
             elements: [
               {
+                title: "Is this the right picture?",
+                subtitle: "Tap a button to answer.",
                 buttons: [
                   {
                     type: "postback",
