@@ -47,7 +47,7 @@ function renderMessages(text) {
     case "help":
       return help();
     case "thoi tiet":
-      return getWeather();
+      return `${getWeather()}`;
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
       break;
