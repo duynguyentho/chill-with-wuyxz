@@ -1,6 +1,10 @@
 let time = () => {
   let date = "";
   const today = new Date();
+  let minute =
+    today.getUTCMinutes() < 10
+      ? `0${today.getUTCMinutes}`
+      : `${today.getUTCMinutes()}`;
   let day = parseInt(new Date().getDay());
   switch (day) {
     case 0:
@@ -27,7 +31,7 @@ let time = () => {
   }
   return `Hôm nay là ${date}, ngày ${today.getDate()}/${
     today.getUTCMonth() + 1
-  }/${today.getUTCFullYear()}. Hiện tại ${today.getHours()}:${today.getUTCMinutes()} `;
+  }/${today.getUTCFullYear()}. Hiện tại ${today.getHours()}:${minute} `;
 };
 let help = () => {
   return (
