@@ -32,7 +32,7 @@ let time = () => {
   return (
     `Hôm nay là ${date}, ngày ${today.getDate()}/${
       today.getUTCMonth() + 1
-    }/${today.getUTCFullYear()}. Hiện tại ${today.getHours()}:` + minute
+    }/${today.getUTCFullYear()}. Hiện tại ${today.getUTCHours()}:` + minute
   );
 };
 let help = () => {
