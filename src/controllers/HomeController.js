@@ -23,7 +23,7 @@ function renderMessages(sender_psid, text) {
       return ChatController.greeting();
     case "xin chao":
       return ChatController.greeting();
-    case "check":
+    case "lich":
       return `Hôm nay bạn học môn ABC!`;
 
     default:
@@ -32,7 +32,6 @@ function renderMessages(sender_psid, text) {
 }
 let postWebhook = (req, res) => {
   let body = req.body;
-  let today = new Date();
 
   // Checks this is an event from a page subscription
   if (body.object === "page") {
@@ -48,9 +47,10 @@ let postWebhook = (req, res) => {
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      if (today.getUTCHours() == 7) {
-        handleMessage(sender_psid, "check");
-      }
+      setInterval(() => {
+        const today = new Date().getSeconds();
+        handleMessage(sender_psid, "lich");
+      }, 5000);
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
       } else if (webhook_event.postback) {
