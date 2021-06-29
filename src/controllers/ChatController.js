@@ -27,7 +27,7 @@ let time = () => {
   }
   return `Hôm nay là ${date}, ngày ${today.getDate()}/${
     today.getUTCMonth() + 1
-  }/${today.getUTCFullYear()}. Hiện tại ${today.getUTCHours()}:${today.getUTCMinutes()} `;
+  }/${today.getUTCFullYear()}. Hiện tại ${today.getHours()}:${today.getUTCMinutes()} `;
 };
 let help = () => {
   return (
