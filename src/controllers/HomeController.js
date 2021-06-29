@@ -1,51 +1,25 @@
 require("dotenv").config();
 import request from "request";
+import ChatController from "./ChatController";
 import chatbotService from "../services/chatbotservice";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 let index = (req, res) => {
   return res.render("home.ejs");
 };
-function time() {
-  let date = "";
-  const today = new Date();
-  let day = parseInt(new Date().getDay());
-  switch (day) {
-    case 0:
-      date = "Chủ nhật";
-      break;
-    case 1:
-      date = "Thứ hai";
-      break;
-    case 2:
-      date = "Thứ ba";
-      break;
-    case 3:
-      date = "Thứ tư";
-      break;
-    case 4:
-      date = "Thứ năm";
-      break;
-    case 5:
-      date = "Thứ sáu";
-      break;
-    case 6:
-      date = "Thứ bảy";
-      break;
-  }
-  return `Hôm nay là ${date}, ngày ${today.getDate()}/${
-    today.getUTCMonth() + 1
-  }/${today.getUTCFullYear()} `;
-}
+
 function renderMessages(sender_psid, text) {
   let str = removeAccents(text.toLowerCase());
   switch (str) {
     case "hom nay":
-      return time();
+      return ChatController.time;
     case "today":
-      return time();
+      return ChatController.time;
     case "help":
-      return help();
+      return ChatController.time;
+    case "hello":
+      //return greeting();
+      break;
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
   }
@@ -255,21 +229,7 @@ function removeAccents(str) {
   }
   return str;
 }
-function help() {
-  return (
-    `---Hướng dẫn sử dụng---` +
-    `\n` +
-    `help            -- Xem hướng dẫn` +
-    `\n` +
-    `hôm nay / today --Xem ngày hôm nay` +
-    `\n` +
-    `add             --Thêm lịch học` +
-    `\n` +
-    `thời tiết       --Xem thời tiết` +
-    `\n` +
-    `love            --Nhận một lời tỏ tình`
-  );
-}
+
 let setUpProfile = async (req, res) => {
   // Construct the message body
   let request_body = {
