@@ -12,11 +12,11 @@ function renderMessages(sender_psid, text) {
   let str = removeAccents(text.toLowerCase());
   switch (str) {
     case "hom nay":
-      return ChatController.time;
+      return ChatController.time();
     case "today":
-      return ChatController.time;
+      return ChatController.time();
     case "help":
-      return ChatController.time;
+      return ChatController.help();
     case "hello":
       //return greeting();
       break;
