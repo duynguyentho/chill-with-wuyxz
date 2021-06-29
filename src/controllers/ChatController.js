@@ -3,7 +3,7 @@ let time = () => {
   const today = new Date();
   let minute =
     today.getUTCMinutes() < 10
-      ? `0${today.getUTCMinutes}`
+      ? `0${today.getUTCMinutes()}`
       : `${today.getUTCMinutes()}`;
   let day = parseInt(new Date().getDay());
   switch (day) {
