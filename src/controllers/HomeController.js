@@ -18,8 +18,12 @@ function renderMessages(sender_psid, text) {
     case "help":
       return ChatController.help();
     case "hello":
-      //return greeting();
-      break;
+      return ChatController.greeting();
+    case "hi":
+      return ChatController.greeting();
+    case "xin chao":
+      return ChatController.greeting();
+
     default:
       return `Có vẻ cậu đang tìm kiếm thứ gì đó...\n Gõ help để xem hướng dẫn nhé !`;
   }

@@ -1,4 +1,4 @@
-function time() {
+let time = () => {
   let date = "";
   const today = new Date();
   let day = parseInt(new Date().getDay());
@@ -28,8 +28,8 @@ function time() {
   return `Hôm nay là ${date}, ngày ${today.getDate()}/${
     today.getUTCMonth() + 1
   }/${today.getUTCFullYear()} `;
-}
-function help() {
+};
+let help = () => {
   return (
     `---Hướng dẫn sử dụng---` +
     `\n` +
@@ -43,7 +43,11 @@ function help() {
     `\n` +
     `love            --Nhận một lời tỏ tình`
   );
-}
+};
+
+let greeting = () => {
+  return `Chào cậu, Mình là chill with Wuyxz. Rất vui được phục vụ cậu`;
+};
 
 module.exports = {
   time: time,
