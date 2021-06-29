@@ -242,12 +242,10 @@ let setUpProfile = async (req, res) => {
     get_started: { payload: "GET_STARTED" },
     whitelisted_domains: ["https://wuyxz.herokuapp.com/"],
   };
-  //   Template String
-
   // Send the HTTP request to the Messenger Platform
   await request(
     {
-      uri: `https://graph.facebook.com/v11.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+      uri: `https://graph.facebook.com/v11.0/me/custom_user_settings?access_token=${PAGE_ACCESS_TOKEN}`,
       qs: { access_token: PAGE_ACCESS_TOKEN },
       method: "POST",
       json: request_body,
@@ -263,9 +261,58 @@ let setUpProfile = async (req, res) => {
   );
   return res.send("Set up user profile success!");
 };
+
+let setUpPersistentMenu = async (req, res) => {
+  // Construct the message body
+  let request_body = {
+    get_started: { payload: "GET_STARTED" },
+    persistent_menu: [
+      {
+        locale: "default",
+        composer_input_disabled: false,
+        call_to_actions: [
+          {
+            type: "web_url",
+            title: "Contact me",
+            url: "https://www.facebook.com/wuyxz/",
+            webview_height_ratio: "full",
+          },
+          {
+            type: "postback",
+            title: "Add your Schedule",
+            payload: "LICH_HOC",
+          },
+          {
+            type: "postback",
+            title: "Restart bot",
+            payload: "GET_STARTED",
+          },
+        ],
+      },
+    ],
+  };
+  // Send the HTTP request to the Messenger Platform
+  await request(
+    {
+      uri: `https://graph.facebook.com/v11.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+      method: "POST",
+      json: request_body,
+    },
+    (err, res, body) => {
+      console.log(body);
+      if (!err) {
+        console.log("Set up persistent success!");
+      } else {
+        console.error("Unable to set up persistent:" + err);
+      }
+    }
+  );
+  return res.send("Set up user profile success!");
+};
 module.exports = {
   index: index,
   postWebhook: postWebhook,
   getWebhook: getWebhook,
   setUpProfile: setUpProfile,
+  setUpPersistentMenu: setUpPersistentMenu,
 };
