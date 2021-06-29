@@ -52,4 +52,5 @@ let greeting = () => {
 module.exports = {
   time: time,
   help: help,
+  greeting: greeting,
 };
