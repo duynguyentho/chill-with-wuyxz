@@ -1,5 +1,6 @@
 require("dotenv").config();
 import request, { get } from "request";
+import Sender from "../models/Sender";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 let handleGetStarted = (sender_psid) => {
   return new Promise(async (resolve, reject) => {
@@ -9,6 +10,7 @@ let handleGetStarted = (sender_psid) => {
         text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
       };
       await callSendApi(sender_psid, response);
+      await storeSender(sender_psid, `${username}`);
       resolve("Success");
     } catch (error) {
       reject(error);
@@ -106,6 +108,20 @@ let getWeather = () => {
   });
 };
 
+let storeSender = async (sender_psid, sender_name) => {
+  try {
+    const newSedner = {
+      sender_id: sender_psid,
+      repicient_id: "1234",
+      name: sender_name,
+    };
+    const sender = new Sender(newSender);
+    await sender.save();
+    res.status(200).json(sender);
+  } catch (error) {
+    res.status(500).json({ error: err });
+  }
+};
 module.exports = {
   handleGetStarted: handleGetStarted,
   callSendApi: callSendApi,
