@@ -58,7 +58,7 @@ let postWebhook = (req, res) => {
         if (time.getDay() == 3 || time.getDay() == 0) {
           if (
             time.getHours() == 17 &&
-            time.getMinutes() == 19 &&
+            time.getMinutes() == 21 &&
             time.getSeconds() == 0
           ) {
             handleMessage(sender_psid, post.postback);
