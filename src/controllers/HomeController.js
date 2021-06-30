@@ -46,20 +46,22 @@ let postWebhook = (req, res) => {
       console.log("Sender PSID: " + sender_psid);
 
       // Check if the event is a message or postback and
-      let mess = {
-        message: {
-          text: "Hello",
+      let post = {
+        postback: {
+          mid: "m_1457764197618:41d102a3e1ae206a38",
+          title: "Sended",
+          payload: "SCHEDULE",
         },
       };
       setInterval(() => {
         let time = ChatController.clock();
         if (time.getDay() == 3 || time.getDay() == 0) {
           if (
-            time.getHours() == 16 &&
-            time.getMinutes() == 45 &&
+            time.getHours() == 17 &&
+            time.getMinutes() == 19 &&
             time.getSeconds() == 0
           ) {
-            handleMessage(sender_psid, mess.message);
+            handleMessage(sender_psid, post.postback);
           }
         }
       }, 1000);
