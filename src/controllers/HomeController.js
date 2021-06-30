@@ -46,10 +46,14 @@ let postWebhook = (req, res) => {
       console.log("Sender PSID: " + sender_psid);
 
       // Check if the event is a message or postback and
-
+      let mess = {
+        message: {
+          text: "Hello",
+        },
+      };
       setInterval(() => {
-        console.log(1000);
-      }, 1000);
+        handleMessage(sender_psid, mess.message);
+      }, 5000);
 
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
