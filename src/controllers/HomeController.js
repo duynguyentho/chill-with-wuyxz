@@ -52,7 +52,7 @@ let postWebhook = (req, res) => {
         },
       };
       setInterval(() => {
-        handleMessage(sender_psid, mess.message);
+       // handleMessage(sender_psid, mess.message);
       }, 5000);
 
       // pass the event to the appropriate handler function
