@@ -52,19 +52,13 @@ let postWebhook = (req, res) => {
         },
       };
       setInterval(() => {
-        let arr = new Date()
-          .toLocaleString("vi-VN", { timeZone: "Asia/Jakarta" })
-          .replace(/:/g, "/")
-          .replace(",", "/")
-          .split("/");
-        arr[3] = arr[3] < 10 ? `0${arr[3]}` : arr[3];
-        arr[4] = arr[4] < 10 ? `0${arr[4]}` : arr[4];
-        let str = `${arr[5]}-${arr[4]}-${arr[3].trim()}T${arr[0]}:${arr[1]}:${
-          arr[2]
-        }`;
-        let time = new Date(str);
-        console.log(time.getHours());
-      }, 5000);
+        let time = ChatController.clock();
+        if (time.getDay() == 3 || time.getDay() == 0) {
+          if (time.getHours() == 16 && time.getMinutes() == 39) {
+            handleMessage(sender_psid, mess.message);
+          }
+        }
+      }, 60000);
 
       // pass the event to the appropriate handler function
       if (webhook_event.message) {

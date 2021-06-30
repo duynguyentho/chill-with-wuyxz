@@ -55,8 +55,23 @@ let greeting = () => {
   return `Chào cậu, Mình là chill with Wuyxz. Rất vui được phục vụ cậu`;
 };
 
+let clock = () => {
+  let arr = new Date()
+    .toLocaleString("vi-VN", { timeZone: "Asia/Jakarta" })
+    .replace(/:/g, "/")
+    .replace(",", "/")
+    .split("/");
+  arr[3] = arr[3] < 10 ? `0${arr[3]}` : arr[3];
+  arr[4] = arr[4] < 10 ? `0${arr[4]}` : arr[4];
+  let str = `${arr[5]}-${arr[4]}-${arr[3].trim()}T${arr[0]}:${arr[1]}:${
+    arr[2]
+  }`;
+  return new Date(str);
+};
+
 module.exports = {
   time: time,
   help: help,
   greeting: greeting,
+  clock: clock,
 };
