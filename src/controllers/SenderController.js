@@ -8,6 +8,7 @@ let getSenders = async (req, res, next) => {
     })
     .catch(next);
 };
+
 module.exports = {
   getSenders: getSenders,
 };

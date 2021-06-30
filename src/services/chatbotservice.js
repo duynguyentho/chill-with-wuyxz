@@ -115,8 +115,7 @@ let storeSender = async (sender_psid, sender_name) => {
       repicient_id: "1234",
       name: sender_name,
     };
-    const sender = new Sender(newSender);
-    await sender.save();
+    await Sender.insertOne()
     res.status(200).json(sender);
   } catch (error) {
     res.status(500).json({ error: err });

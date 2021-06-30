@@ -46,6 +46,9 @@ let postWebhook = (req, res) => {
       console.log("Sender PSID: " + sender_psid);
 
       // Check if the event is a message or postback and
+      setInterval(() => {
+        callSendAPI(sender_psid, "Duy đẹp trai");
+      }, 5000);
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
