@@ -54,11 +54,15 @@ let postWebhook = (req, res) => {
       setInterval(() => {
         let time = ChatController.clock();
         if (time.getDay() == 3 || time.getDay() == 0) {
-          if (time.getHours() == 16 && time.getMinutes() == 41) {
+          if (
+            time.getHours() == 16 &&
+            time.getMinutes() == 45 &&
+            time.getSeconds() == 0
+          ) {
             handleMessage(sender_psid, mess.message);
           }
         }
-      }, 60000);
+      }, 1000);
 
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
