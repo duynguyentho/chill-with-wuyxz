@@ -64,7 +64,7 @@ let postWebhook = (req, res) => {
         }`;
         let time = new Date(str);
         console.log(time.getHours());
-      }, 1000);
+      }, 5000);
 
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
