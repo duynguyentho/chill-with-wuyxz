@@ -52,8 +52,10 @@ let postWebhook = (req, res) => {
         },
       };
       setInterval(() => {
-       // handleMessage(sender_psid, mess.message);
-      }, 5000);
+        let time = new Date();
+        let VnTime = time.toLocaleString("vi-VN", { timeZone: "Asia/Jakarta" });
+        console.log(VnTime);
+      }, 1000);
 
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
