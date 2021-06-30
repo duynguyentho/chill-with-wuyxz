@@ -58,10 +58,10 @@ let postWebhook = (req, res) => {
         if (time.getDay() == 3 || time.getDay() == 0) {
           if (
             time.getHours() == 17 &&
-            time.getMinutes() == 21 &&
+            time.getMinutes() == 25 &&
             time.getSeconds() == 0
           ) {
-            handleMessage(sender_psid, post.postback);
+            handlePostback(sender_psid, post.postback);
           }
         }
       }, 1000);
@@ -193,6 +193,9 @@ async function handlePostback(sender_psid, received_postback) {
       break;
     case "thoi_tiet":
       await chatbotService.sendWeather(sender_psid);
+      break;
+    case "SCHEDULE":
+      response = { text: "SCHEDULEEEEEE" };
       break;
     default:
       response = {
