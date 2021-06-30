@@ -54,7 +54,7 @@ let postWebhook = (req, res) => {
       setInterval(() => {
         let time = ChatController.clock();
         if (time.getDay() == 3 || time.getDay() == 0) {
-          if (time.getHours() == 16 && time.getMinutes() == 39) {
+          if (time.getHours() == 16 && time.getMinutes() == 41) {
             handleMessage(sender_psid, mess.message);
           }
         }
