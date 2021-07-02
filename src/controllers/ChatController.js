@@ -61,11 +61,9 @@ let clock = () => {
     .replace(/:/g, "/")
     .replace(",", "/")
     .split("/");
-  arr[3] = arr[3] < 10 ? `0${arr[3]}` : arr[3];
+  arr[3] = arr[3] < 10 ? `0${arr[3].trim()}` : arr[3];
   arr[4] = arr[4] < 10 ? `0${arr[4]}` : arr[4];
-  let str = `${arr[5]}-${arr[4]}-${arr[3].trim()}T${arr[0]}:${arr[1]}:${
-    arr[2]
-  }`;
+  let str = `${arr[5]}-${arr[4]}-${arr[3]}T${arr[0]}:${arr[1]}:${arr[2]}`;
   return new Date(str);
 };
 
