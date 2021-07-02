@@ -57,8 +57,8 @@ let postWebhook = (req, res) => {
         let time = ChatController.clock();
         if (time.getDay() == 3 || time.getDay() == 0) {
           if (
-            time.getHours() == 17 &&
-            time.getMinutes() == 25 &&
+            time.getHours() == 7 &&
+            time.getMinutes() == 0 &&
             time.getSeconds() == 0
           ) {
             handlePostback(sender_psid, post.postback);
@@ -196,7 +196,7 @@ async function handlePostback(sender_psid, received_postback) {
       await chatbotService.sendWeather(sender_psid);
       break;
     case "SCHEDULE":
-      response = { text: "SCHEDULEEEEEE" };
+      response = { text: "Chào buổi sáng !" };
       break;
     default:
       response = {
