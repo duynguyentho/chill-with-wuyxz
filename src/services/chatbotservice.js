@@ -10,7 +10,7 @@ let handleGetStarted = (sender_psid) => {
         text: `Chào ${username}. Mình là Chill with wuyxz - một messenger chatbot. Chúc cậu ngày mới tốt lành <3`,
       };
       await callSendApi(sender_psid, response);
-      await storeSender(sender_psid, `${username}`);
+      //await storeSender(sender_psid, `${username}`);
       resolve("Success");
     } catch (error) {
       reject(error);
@@ -115,7 +115,7 @@ let storeSender = async (sender_psid, sender_name) => {
       repicient_id: "1234",
       name: sender_name,
     };
-    await Sender.insertOne()
+    await Sender.insertOne();
     res.status(200).json(sender);
   } catch (error) {
     res.status(500).json({ error: err });

@@ -64,6 +64,7 @@ let postWebhook = (req, res) => {
             handlePostback(sender_psid, post.postback);
           }
         }
+        console.log(time.getSeconds());
       }, 1000);
 
       // pass the event to the appropriate handler function
